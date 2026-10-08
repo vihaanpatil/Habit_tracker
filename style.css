@@ -1,0 +1,525 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #95a6f0, #764ba2);
+    --text-color: white;
+    --button-bg: #1c315e;
+    --button-color: #abb1cd;
+    --table-bg: #95a6f0;
+    --th-bg: #4057be;
+    --checked-bg: #10b981;
+    --habit-name-bg: #bacdf2;
+    --canvas-bg: #a4aaee;
+    --border-color: #afb1b7;
+}
+
+body {
+    font-family: Arial;
+    background: var(--bg-gradient);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: var(--text-color);
+}
+
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+    border-radius: 6px;
+    border: none;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background: var(--button-bg);
+    color: var(--button-color);
+    cursor: pointer;
+}
+
+.tableContainer {
+    background: var(--table-bg);
+    /* padding: 10px; */
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* first column holds habit names - make it sticky */
+table th:first-child,
+table td:first-child {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--habit-name-bg);
+}
+
+th,
+td {
+    border: 1px solid var(--border-color);
+    padding: 6px;
+    font-size: 12px;
+}
+
+th {
+    background: var(--th-bg);
+    color: grey;
+}
+
+table th:first-child {
+    background: var(--th-bg);
+    color: white;
+}
+
+td {
+    cursor: pointer;
+}
+
+.checked {
+    background: var(--checked-bg);
+}
+
+.habitName {
+    font-weight: bold;
+    background: var(--habit-name-bg);
+}
+
+/* Canvas background */
+canvas {
+    background: var(--canvas-bg);
+}
+
+/* Theme switcher */
+.theme-selector {
+    margin-bottom: 20px;
+}
+
+.theme-selector select {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+}
+
+/* Dark Theme */
+.dark-theme {
+    --bg-gradient: linear-gradient(135deg, #1f2937, #111827);
+    --text-color: #f3f4f6;
+    --button-bg: #374151;
+    --button-color: #c5cad2;
+    --table-bg: #1f2937;
+    --th-bg: #1f2937;
+    --checked-bg: #10b981;
+    --habit-name-bg: #6a6a89;
+    --canvas-bg: #5b7086;
+    --border-color: #a3a3a3;
+}
+
+/* Pastel Theme */
+.pastel-theme {
+    --bg-gradient: linear-gradient(135deg, #e4bed4, #eaa7cd);
+    --text-color: #831843;
+    --button-bg: #ec4899;
+    --button-color: #8f244f;
+    --table-bg: #e4bed4;
+    --th-bg: #ec4899;
+    --checked-bg: #10b981;
+    --habit-name-bg: #fce7f3;
+    --canvas-bg: #f2d1e5;
+    --border-color: #dac0f5;
+}
+
+/* Earthy Theme */
+.earthy-theme {
+    --bg-gradient: linear-gradient(135deg, #976953, #ddcbb7);
+    --text-color: #ffffff;
+    --button-bg: #7c5757;
+    --button-color: #ecdcd3;
+    --table-bg: #ddcbb7;
+    --th-bg: #98674b;
+    --checked-bg: #10b981;
+    --habit-name-bg: #e1b97e;
+    --canvas-bg: #e4b78a;
+    --border-color: #ecb9a0c6;
+}
+
+
+.charts {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.main-charts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.individual-charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.habit-chart-wrapper {
+    width: calc(33.333% - 13.333px);
+    min-width: 150px;
+    height: 120px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.habit-chart-title {
+    font-size: 12px;
+    margin-bottom: 4px;
+    text-align: center;
+
+}
+
+.smallBtn {
+    margin-left: 4px;
+    padding: 2px 5px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.smallBtn:hover {
+    opacity: 0.8;
+}
+
+canvas {
+    background: var(--canvas-bg);
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 300px;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    body {
+        padding: 12px;
+    }
+
+    .controls {
+        justify-content: stretch;
+    }
+
+    .controls input,
+    .controls button {
+        width: 100%;
+        max-width: none;
+    }
+
+    .summarySection,
+    .todayBanner {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .weeklySection,
+    .notesSection {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .charts {
+        gap: 20px;
+    }
+
+    .main-charts {
+        width: 100%;
+    }
+
+    .individual-charts {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .habit-chart-wrapper {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+
+    table th,
+    table td {
+        font-size: 10px;
+        padding: 4px;
+    }
+
+    .tableContainer {
+        max-height: 300px;
+        padding: 8px;
+    }
+
+    #notesArea {
+        height: 120px;
+    }
+}
+
+/* highlight current day column */
+th.currentDay {
+    background: #ef0606;
+}
+
+.todayBanner {
+    max-width: 1000px;
+    margin: 0 auto 12px auto;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    color: #2d3436;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.todayBadge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.08);
+    color: #2d3436;
+}
+
+.todayBadge.todayDone {
+    background: #00b894;
+    color: white;
+}
+
+.todayBannerText {
+    flex: 1 1 auto;
+    min-width: 220px;
+}
+
+.weeklySummary {
+    max-width: 1000px;
+    margin: 0 auto 20px auto;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    color: #2d3436;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+}
+
+/* past days are read-only */
+td.past,
+th.past {
+    background: #f0f0f0;
+    cursor: not-allowed;
+}
+
+/* future days are read-only */
+td.future,
+th.future {
+    background: #f7f7f7;
+    cursor: not-allowed;
+}
+
+/* today's column highlight */
+td.today {
+    outline: 2px solid #fdcb6e;
+}
+
+/* restart button */
+.restartBtn {
+    background: #ff7675;
+    color: white;
+    margin-left: 8px;
+}
+
+.restartBtn:hover {
+    opacity: 0.85;
+}
+
+.summarySection {
+    margin-top: 10px;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+/* Weekly Tasks Section */
+.weeklySection {
+    background: var(--canvas-bg);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+.weeklyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+#weeklyWeekDisplay {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.dateDisplay {
+    max-width: 1000px;
+    margin: 0 auto 12px auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.weeklySection input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.weeklySection .secondaryBtn {
+    background: #636e72;
+    color: white;
+    margin-left: 8px;
+}
+
+.weeklySection .secondaryBtn:hover {
+    opacity: 0.85;
+}
+
+#weeklyTaskList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+#weeklyTaskList li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    gap: 10px;
+}
+
+#weeklyTaskList li input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#weeklyTaskList li span {
+    flex: 1;
+    word-break: break-word;
+}
+
+#weeklyTaskList li.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+#weeklyTaskList .deleteBtn {
+    padding: 5px 10px;
+    font-size: 12px;
+    background: #ff7675;
+    color: white;
+}
+
+#weeklyTaskList .deleteBtn:hover {
+    opacity: 0.85;
+}
+
+/* Notes Section */
+.notesSection {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+#notesArea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    resize: vertical;
+    background-color: var(--canvas-bg);
+}
+
+.notesFooter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notesSection button {
+    background: #00b894;
+    color: white;
+}
+
+.notesSection button:hover {
+    opacity: 0.85;
+}
+
+.notesStatus {
+    color: #2d3436;
+    font-size: 13px;
+}
+
+h2 {
+    color: white;
+    margin-top: 30px;
+}

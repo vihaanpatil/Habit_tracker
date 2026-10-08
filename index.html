@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>1 Year Habit Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body>
+
+<h1>365 Day Habit Tracker</h1>
+
+<div class="theme-selector">
+    <label for="themeSelect">Choose Palette:</label>
+    <select id="themeSelect">
+        <option value="default">Default</option>
+        <option value="dark">Dark Night</option>
+        <option value="pastel">Pastel Dream</option>
+        <option value="earthy">Earthy Tones</option>
+    </select>
+</div>
+
+<div class="controls">
+
+<input id="habitInput" placeholder="Add Habit">
+<button onclick="addHabit()">Add Habit</button>
+<button onclick="restart()" class="restartBtn">Restart</button>
+
+<span id="counter"></span>
+<div id="progressSummary" class="summarySection"></div>
+
+</div>
+
+<div id="todayBanner" class="todayBanner">
+    <span id="todayBadge" class="todayBadge"></span>
+    <span id="todayBannerText" class="todayBannerText"></span>
+</div>
+<div id="dateDisplay" class="dateDisplay"></div>
+<div id="weeklySummary" class="weeklySummary"></div>
+
+<div class="tableContainer">
+
+<table id="tracker">
+
+<thead id="dayHeader"></thead>
+
+<tbody id="habitBody"></tbody>
+
+</table>
+
+</div>
+
+<h2>Weekly Tasks</h2>
+<div class="weeklySection">
+<div class="weeklyHeader">
+    <button onclick="prevWeek()" id="prevWeekBtn" class="smallBtn">&#8592;</button>
+    <span id="weeklyWeekDisplay">Week X</span>
+    <button onclick="nextWeek()" id="nextWeekBtn" class="smallBtn">&#8594;</button>
+</div>
+<input id="weeklyInput" placeholder="Add Weekly Task">
+<button onclick="addWeeklyTask()">Add Task</button>
+<button onclick="clearCompletedWeeklyTasks()" class="smallBtn secondaryBtn">Clear Completed</button>
+<ul id="weeklyTaskList"></ul>
+</div>
+
+<h2>Notes</h2>
+<div class="notesSection">
+<textarea id="notesArea" placeholder="Write your notes here..."></textarea>
+<div class="notesFooter">
+    <button onclick="saveNotes()">Save Notes</button>
+    <span id="notesStatus" class="notesStatus"></span>
+</div>
+</div>
+
+<h2>Progress Reports</h2>
+
+<div class="charts">
+    <div class="main-charts">
+        <canvas id="lineChart"></canvas>
+        <canvas id="pieChart"></canvas>
+    </div>
+    <div id="individualCharts" class="individual-charts"></div>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
